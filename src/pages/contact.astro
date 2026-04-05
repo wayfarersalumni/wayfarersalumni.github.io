@@ -1,0 +1,139 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Contact Us" description="Get in touch with Wayfarers Alumni">
+    <section class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl font-bold text-center mb-8">Contact Us</h1>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">Get in Touch</h2>
+                    <p class="text-gray-600 mb-6">
+                        Have questions? Want to share a trip report? Interested
+                        in organizing an event? We'd love to hear from you!
+                    </p>
+
+                    <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                        <h3 class="text-lg font-semibold mb-2">Email</h3>
+                        <a
+                            href="mailto:wayfarersalumni@gmail.com"
+                            class="text-green-700 hover:text-green-800 text-lg"
+                        >
+                            wayfarersalumni@gmail.com
+                        </a>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold mb-2">
+                            Mailing Address
+                        </h3>
+                        <p class="text-gray-600">
+                            Wayfarers Alumni<br />
+                            c/o Wayfarers Hiking Society<br />
+                            University of Birmingham<br />
+                            Birmingham, UK
+                        </p>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">Send Us a Message</h2>
+                    <form
+                        class="space-y-4"
+                        action="https://forms.gle/YOUR_GOOGLE_FORM_ID"
+                        method="GET"
+                        target="_blank"
+                    >
+                        <div>
+                            <label
+                                for="name"
+                                class="block text-sm font-medium text-gray-700 mb-1"
+                                >Your Name</label
+                            >
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                            />
+                        </div>
+
+                        <div>
+                            <label
+                                for="email"
+                                class="block text-sm font-medium text-gray-700 mb-1"
+                                >Email Address</label
+                            >
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                            />
+                        </div>
+
+                        <div>
+                            <label
+                                for="subject"
+                                class="block text-sm font-medium text-gray-700 mb-1"
+                                >Subject</label
+                            >
+                            <select
+                                id="subject"
+                                name="subject"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                            >
+                                <option value="">Select a topic...</option>
+                                <option value="event"
+                                    >Organizing an Event</option
+                                >
+                                <option value="trip"
+                                    >Sharing a Trip Report</option
+                                >
+                                <option value="membership"
+                                    >Alumni Directory</option
+                                >
+                                <option value="donation">Donations</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label
+                                for="message"
+                                class="block text-sm font-medium text-gray-700 mb-1"
+                                >Message</label
+                            >
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="5"
+                                required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                            ></textarea>
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="w-full bg-green-700 text-white py-3 rounded-lg font-semibold hover:bg-green-800 transition"
+                        >
+                            Send Message
+                        </button>
+                    </form>
+
+                    <p class="text-sm text-gray-500 mt-4 text-center">
+                        Or email us directly at <a
+                            href="mailto:wayfarersalumni@gmail.com"
+                            class="text-green-700 hover:text-green-800"
+                            >wayfarersalumni@gmail.com</a
+                        >
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>

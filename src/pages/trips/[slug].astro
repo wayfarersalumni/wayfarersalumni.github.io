@@ -1,0 +1,168 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+    const trips = await getCollection("trips");
+    return trips.map((trip) => ({
+        params: { slug: trip.id },
+        props: { trip: trip },
+    }));
+}
+
+const { trip } = Astro.props;
+---
+
+<Layout title={trip.data.title} description={trip.data.description}>
+    <article class="py-16 bg-white">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <a
+                href="/trips"
+                class="inline-flex items-center text-green-700 hover:text-green-800 mb-8"
+            >
+                <svg
+                    class="w-4 h-4 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 19l-7-7 7-7"></path>
+                </svg>
+                Back to Trip Reports
+            </a>
+
+            <header class="mb-8">
+                <time
+                    class="text-sm text-gray-500"
+                    datetime={trip.data.tripDate.toISOString()}
+                >
+                    {
+                        trip.data.tripDate.toLocaleDateString("en-GB", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                        })
+                    }
+                </time>
+                <h1 class="text-4xl font-bold mt-2 mb-4">{trip.data.title}</h1>
+
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span
+                        class="px-3 py-1 bg-green-100 text-green-800 rounded-full"
+                        >{trip.data.location}</span
+                    >
+                    {
+                        trip.data.difficulty && (
+                            <span
+                                class={`px-3 py-1 rounded-full ${
+                                    trip.data.difficulty === "Easy"
+                                        ? "bg-green-100 text-green-800"
+                                        : trip.data.difficulty === "Moderate"
+                                          ? "bg-yellow-100 text-yellow-800"
+                                          : trip.data.difficulty ===
+                                              "Challenging"
+                                            ? "bg-orange-100 text-orange-800"
+                                            : "bg-red-100 text-red-800"
+                                }`}
+                            >
+                                {trip.data.difficulty}
+                            </span>
+                        )
+                    }
+                </div>
+
+                <div class="flex flex-wrap gap-4 text-gray-600">
+                    {
+                        trip.data.distance && (
+                            <span>📏 Distance: {trip.data.distance}</span>
+                        )
+                    }
+                    {
+                        trip.data.elevation && (
+                            <span>⛰ Elevation: {trip.data.elevation}</span>
+                        )
+                    }
+                    {
+                        trip.data.route && (
+                            <span>🗺 Route: {trip.data.route}</span>
+                        )
+                    }
+                </div>
+
+                {
+                    trip.data.conditions && (
+                        <p class="mt-4 text-gray-600">
+                            <strong>Conditions:</strong> {trip.data.conditions}
+                        </p>
+                    )
+                }
+            </header>
+
+            {
+                trip.data.photos && trip.data.photos.length > 0 && (
+                    <div class="mb-8">
+                        <div class="grid grid-cols-2 gap-4">
+                            {trip.data.photos.map((photo, index) => (
+                                <img
+                                    src={photo}
+                                    alt={`${trip.data.title} - Photo ${index + 1}`}
+                                    class={`rounded-lg shadow-md ${index === 0 ? "col-span-2" : ""}`}
+                                    loading="lazy"
+                                />
+                            ))}
+                        </div>
+                    </div>
+                )
+            }
+
+            <div class="prose prose-lg max-w-none">
+                <slot />
+            </div>
+
+            <footer class="mt-12 pt-8 border-t">
+                <div class="flex items-center justify-between">
+                    <a
+                        href="/trips"
+                        class="inline-flex items-center text-green-700 hover:text-green-800 font-medium"
+                    >
+                        <svg
+                            class="w-4 h-4 mr-2"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                        Back to Trip Reports
+                    </a>
+                    <a
+                        href="/contact"
+                        class="inline-flex items-center text-green-700 hover:text-green-800"
+                    >
+                        Share Your Trip
+                        <svg
+                            class="w-4 h-4 ml-2"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </footer>
+        </div>
+    </article>
+</Layout>
